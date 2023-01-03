@@ -9,8 +9,8 @@ Future push(BuildContext context, Widget page) {
 Future pushReplacement(BuildContext context, Widget page) {
   return Navigator.pushReplacement(context,
       MaterialPageRoute(builder: (context) {
-        return page;
-      }));
+    return page;
+  }));
 }
 
 void pop<T extends Object>(context, [T? result]) {
