@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       blocs: [
-        Bloc((i) => MoviesBloc()),
-//        Bloc((i) => FavoritosBloc()),
+        // Bloc((i) => MoviesBloc()),
+        // Bloc((i) => FavoritosBloc()),
       ],
       dependencies: [],
       child: MaterialApp(
