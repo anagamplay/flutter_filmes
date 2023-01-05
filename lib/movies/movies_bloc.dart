@@ -15,7 +15,7 @@ class MoviesBloc extends SimpleBloc {
       print("Movies: $movies");
       return movies;
     } catch (error) {
-      print('Erro: $error');
+      // print('Erro: $error');
       addError("Nenhum Filme !!!");
     }
   }
