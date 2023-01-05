@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_filmes/movies/movie.dart';
 import 'package:flutter_filmes/movies/movie_bloc.dart';
@@ -15,6 +16,8 @@ class _MoviePageState extends State<MoviePage> {
   final _bloc = MovieBloc();
 
   Movie get movie => widget.movie;
+
+  bool? data = false;
 
   @override
   void initState() {
@@ -37,22 +40,7 @@ class _MoviePageState extends State<MoviePage> {
         expandedHeight: 350,
         pinned: false,
         actions: <Widget>[
-          IconButton(
-            icon: StreamBuilder<bool>(
-              initialData: false,
-              stream: _bloc.getFavoritos,
-              builder: (context, snapshot) {
-                return Icon(
-                  Icons.favorite,
-                  size: 34,
-                  color: snapshot.data! ? Colors.red : Colors.white,
-                );
-              },
-            ),
-            onPressed: () {
-              _onClickFavoritar();
-            },
-          ),
+          iconFavorito(),
         ],
         flexibleSpace: FlexibleSpaceBar(
           centerTitle: false,
@@ -188,5 +176,30 @@ class _MoviePageState extends State<MoviePage> {
     super.dispose();
 
     _bloc.dispose();
+  }
+
+  iconFavorito() {
+    return InkWell(
+      onTap: () {
+        _onClickFavoritar();
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 10),
+        width: 66,
+        height: 66,
+        child: StreamBuilder<bool>(
+          initialData: false,
+          stream: _bloc.getFavoritos,
+          builder: (context, snapshot) {
+            return FlareActor(
+              'assets/animations/heart.flr',
+              color: snapshot.data! ? Colors.red : Colors.white,
+              shouldClip: false,
+              animation: snapshot.data! ? "Like" : "Dislike",
+            );
+          },
+        ),
+      ),
+    );
   }
 }
